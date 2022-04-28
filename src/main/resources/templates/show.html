@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Liste des tournois</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/club/all">ITournoi</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="/club/all">Gestions des clubs <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tournoi/all">Gestion des tournois</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+<div class="container m-3">
+	<h1>Liste des tournois</h1>
+	<div class="my-3">
+		<a href="/tournoi/add" class="btn btn-primary">Ajouter une tournoi</a>
+	</div>
+	<div class="mb-3">
+		<form method="post" action="/tournoi/find">
+		<div class="row">
+			<div class="col-8">
+				<input type="search" name="motcle" class="form-control" placeholder="saisir le nom"/>
+			</div>
+			<div class="col-4">
+				<input type="submit" value="Rechercher" class="btn btn-outline-success"/>
+			</div>
+		</div>		
+		</form>
+	</div>
+	<table class="table table-striped">
+		<tr>
+			<!-- <th>#</th> -->
+			<th>NOM</th>
+			<th>CLUBS</th>
+			<th colspan="2" style="text-align:center;">ACTIONS</th>
+</tr>
+
+<tr th:each="tournoi : ${tournois}">
+<!--<td th:text="${tournoi.id}"></td> -->
+<td th:text="${tournoi.nom}"></td>
+  <td><ul><li th:each="t : ${tournoi.club}" th:text="${t.nom}"></li></ul></td>
+<td><a th:href="@{/tournoi/update/{id} (id=${tournoi.id})}" class="btn btn-outline-warning">Modifier</a></td>
+<td><a th:href="@{/tournoi/delete/{id} (id=${tournoi.id})}" class="btn btn-outline-danger" onclick="return confirm('Voulez vous vraiment supprimer cette tournoi ? ')">Supprimer</a></td>
+</tr>
+</table>
+</div>
+</body>
+</html>

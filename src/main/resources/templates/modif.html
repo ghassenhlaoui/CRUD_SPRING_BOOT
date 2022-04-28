@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Liste des clubs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Modifier un Club</h1>
+		<form method="post" action="/club/update">
+		<input type="hidden" name="id" th:value="${club.id}">
+			<div class="mb-3 mt-3">
+				<label for="nom" class="form-label">Nom :</label>
+				<input type="text" class="form-control" id="nom" name="nom" th:value="${club.nom}"required>
+			</div>
+			<div class="mb-3 mt-3">
+				<label for="prix" class="form-label">Date Fondation :</label>
+				<input type="text" class="form-control" id="dateFond" name="dateFond" th:value="${club.dateFond}" required>
+			</div>
+			<div class="mb-3 mt-3">
+				<label for="tournoi" class="form-label">Tournoi :</label>
+				<select name="idtour" class="form-select">
+				<option th:each="cat :${tournois}" th:value="${cat.id}" th:text="${cat.nom} "  ></option>		
+				</select>
+			</div>
+			<div class="mb-3 mt-3">
+				<input type="submit" class="btn btn-primary" value="Modifier">
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>

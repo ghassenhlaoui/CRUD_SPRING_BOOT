@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Liste des clubs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/club/all">ITournoi</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="/club/all">Gestions des clubs <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tournoi/all">Gestion des Tournois</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+<div class="container m-3">
+	<h1>Liste des clubs</h1>
+	<div class="my-3">
+		<a href="/club/add" class="btn btn-primary">Ajouter un nouveau club</a>
+	</div>
+	<div class="mb-3">
+		<form method="post" action="/club/find">
+		<div class="row">
+			<div class="col-8">
+				<input type="search" name="motcle" class="form-control" placeholder="saisir nom du club"/>
+			</div>
+			<div class="col-4">
+				<input type="submit" value="Rechercher" class="btn btn-outline-success"/>
+			</div>
+		</div>		
+		</form>
+	</div>
+	<table class="table table-striped">
+		<tr>
+			<!--  <th>#</th>-->
+			<th>DATE FONDATION</th>
+			<th>NON</th>
+			<th>Tournoi</th>
+			<th colspan="2" style="text-align:center;">ACTIONS</th>
+</tr>
+
+<tr th:each="club : ${clubs}">
+<!--<td th:text="${club.id}"></td>-->
+<td th:text="${club.dateFond}"></td>
+<td th:text="${club.nom}"></td>
+<!--  <td th:text="${club.tournoi.nom}"></td>-->
+<td><a th:href="@{/club/update/{id} (id=${club.id})}" class="btn btn-outline-warning">Modifier</a></td>
+<td><a th:href="@{/club/delete/{id} (id=${club.id})}" class="btn btn-outline-danger" onclick="return confirm('Voulez vous vraiment supprimer cet club ? ')">Supprimer</a></td>
+</tr>
+</table>
+</div>
+</body>
+</html>
